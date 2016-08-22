@@ -1,0 +1,16 @@
+{
+  "name": "datus",
+  "version": "0.0.1",
+  "description": "Soon. Soon.",
+  "main": "index.js",
+  "scripts": {
+    "test": "snyk test && tape tests/*.js | tap-spec"
+  },
+  "keywords": [
+    "orm",
+    "sql",
+    "nosql"
+  ],
+  "author": "newworldcode <hello@newworld.codes>",
+  "license": "MIT"
+}
