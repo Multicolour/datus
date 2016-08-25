@@ -1,22 +1,18 @@
 "use strict"
 
-class Adapter {
+const adapter_schema = require("./schemas/adapter")
+
+class Adapter_Interface {
   constructor() {
-    return new Promise((resolve, reject) => 
-      reject(new TypeError("Cannot use Adapter interface as a database adapter.")))
-  }
+    const validation = adapter_schema.validate(this.prototype)
 
-  find(query) {
-
-  }
-
-  update(query, data) {
-
-  }
-
-  delete(query) {
-
+    if (validation.errors) {
+      return Promise.reject(new TypeError("Cannot use Adapter interface as a database adapter."))
+    }
+    else {
+      return this.connect()
+    }
   }
 }
 
-module.exports = Adapter
+module.exports = Adapter_Interface
