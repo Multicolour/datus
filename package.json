@@ -14,7 +14,8 @@
   "author": "newworldcode <hello@newworld.codes>",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^3.3.1"
+    "eslint": "^3.3.1",
+    "tape": "^4.6.0"
   },
   "dependencies": {
     "chalk": "^1.1.3",
