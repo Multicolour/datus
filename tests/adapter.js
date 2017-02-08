@@ -1,36 +1,26 @@
-"use strict"
-
-const {symbols} = require("../lib/recommended")
+const test = require("tape")
 const Adapter_Interface = require("../lib/validation/adapter-interface")
-const {MongoClient} = require("mongodb")
 
-class MongoAdapter extends Adapter_Interface {
-  get [symbols.IS_SCHEMA_ONLY]() {
-    return true
-  }
-
+class Memory_Adapter extends Adapter_Interface {
   constructor() {
     super()
+
+    this.data = {}
   }
 
   connect(config) {
     return new Promise((resolve, reject) => {
-      MongoClient.connect(config.url, config.options, (err, connection) => {
-        if (err) reject(err)
-        else {
-          this.connection = connection
-          resolve()
-        }
-      })
+      this.db = config.db || ""
     })
   }
 
   disconnect() {
-    return this.connection.close()
+    this.data = {}
+    return this
   }
 
   describe() {
-    
+    return this.data
   }
 
   update(criteria, values, options) {
@@ -46,4 +36,9 @@ class MongoAdapter extends Adapter_Interface {
   }
 }
 
-new MongoAdapter()
+test(assert => {
+  assert.plan(2)
+  let adapter
+  assert.doesNotThrow(() => (adapter = new Memory_Adapter()), "No error instantiating adapter")
+  assert.deepEqual(adapter.describe(), {}, "adapter describes {}")
+})

@@ -28,8 +28,13 @@ rules:
     - 121
   max-depth:
     - 1
-    - 4
+    - 2
 env:
   es6: true
   node: true
-extends: 'eslint:recommended'
+parser: "babel-eslint"
+extends:
+  - "eslint:recommended"
+  - "plugin:flowtype/recommended"
+plugins:
+  - "flowtype"

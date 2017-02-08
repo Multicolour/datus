@@ -1,0 +1,9 @@
+[ignore]
+tests
+
+[include]
+
+[libs]
+flow/declarations
+
+[options]
