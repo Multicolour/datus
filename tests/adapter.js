@@ -1,10 +1,8 @@
 const test = require("tape")
 const Adapter_Interface = require("../lib/validation/adapter-interface")
 
-class Memory_Adapter extends Adapter_Interface {
+class Adapter implements Adapter_Interface {
   constructor() {
-    super()
-
     this.data = {}
   }
 

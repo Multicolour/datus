@@ -1,9 +1,9 @@
 [ignore]
-tests
+tests/.*
 
 [include]
 
 [libs]
-flow/declarations
+flow/declarations/
 
 [options]
