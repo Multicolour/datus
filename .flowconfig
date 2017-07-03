@@ -4,6 +4,6 @@ tests/.*
 [include]
 
 [libs]
-flow/declarations/
+node_modules/datus-flow/declarations/
 
 [options]
