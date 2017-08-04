@@ -1,5 +1,7 @@
 [ignore]
-tests/.*
+.*/tests/.*
+.*/node_modules/.*
+.*/dist/.*
 
 [include]
 
