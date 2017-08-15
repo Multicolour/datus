@@ -15,5 +15,11 @@ declare type AttributeType =
   "datetime";
 
 // Simple aliases for validation.
+// We can validate on these as we
+// parse the Flow.
 declare type EmailType = string;
 declare type TelephoneType = string;
+declare type Float32 = number;
+declare type Float64 = number;
+declare type Time = Date;
+declare type DateTime = Date;
