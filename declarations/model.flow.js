@@ -35,14 +35,6 @@ declare interface Model_Interface {
 
   /**
    * Create a new Query that will
-   * perform a search on the db with
-   * an explicit limit(1) on it.
-   * @return {Query} query that hasn't run yet.
-   */
-  findOne(): Query;
-
-  /**
-   * Create a new Query that will
    * delete records from the table.
    * @return {Query} query that hasn't run yet.
    */
@@ -61,10 +53,10 @@ declare interface Model_Interface {
    *
    * Is a Set and not an Array to best ensure
    * the order of insertion as possible.
-   * @param {Set<T> | T} models where T is the implementor of this interface.
+   * @param {Set<M> | M} models where T is the implementor of this interface.
    * @return {Query} query in progress.
    */
-  insert(models: Set<T> | T): Query;
+  insert<M>(models: Set<M> | M): Query;
 
   /**
    * Insert or update a single model
@@ -78,11 +70,11 @@ declare interface Model_Interface {
    * even if the intervening values of update_values
    * are falsey (They must be) they must exist to preserve order.
    *
-   * @param {Set<T> | T} search_or_create models to search for or create.
-   * @param {Set<T> | T} update_values the values to write if the model already exists.
+   * @param {Set<M> | M} search_or_create models to search for or create.
+   * @param {Set<M> | M} update_values the values to write if the model already exists.
    * @return {Query} query that hasn't run yet.
    */
-  upsert(search_or_create: Set<T> | T, update_values: Set<T | void> | T): Query;
+  upsert<M>(search_or_create: Set<M> | M, update_values: Set<M | void> | M): Query;
 
   /**
    * Perform a count on the table.
@@ -98,20 +90,20 @@ declare interface Model_Interface {
    * "*" is used as a wildcard and it
    * returns all columns of the table
    * regardless of whether they are
-   * defined on the table or not.
+   * defined in the schema or not.
    *
-   * @param {Set<$Enum<typeof T.columns>>} columns to return from the query.
+   * @param {Set<$Keys<M>>} columns to return from the query.
    * @return {Query} query that hasn't run yet.
    */
-  select(columns: Set<$Enum<typeof T.columns>>): Query;
+  select<M>(columns: Set<$Keys<M>>): Query;
 
   /**
    * Convert this instance of a model
    * to plain JSON using the reducer
    * to update or remove keys before
    * returning.
-   * @param {function} reducer to use to modify object before return. Optional.
-   * @return {$Keys<T.columns>} JSON object filtered by the reducer.
+   * @param {function?} reducer; optional, to use to modify object before return.
+   * @return {$Keys<M>} JSON object filtered by the reducer.
    */
-  toJSON(reducer?: $Keys<T.columns>): $Keys<T.columns>;
+  toJSON<M>(reducer?: $Keys<M>): $Keys<M>;
 }

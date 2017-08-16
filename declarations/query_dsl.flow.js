@@ -38,11 +38,12 @@ declare class Query {
    * value and optional operator.
    *
    * Default operator is directly equals (=).
-   * @param {<T.columns>} column to do query on.
+   * @param {$Keys<M>} column to do query on.
    * @param {mixed} value to do comparison on.
+   * @param {operator?} operator to use in the comparison.
    * @return {Query} query to continue the query on.
    */
-  where(column: $Keys<T.columns>, value: mixed, operator?: Where_Operator): Query<T>;
+  where<M>(column: $Keys<M>, value: mixed, operator?: Where_Operator): Query<M>;
 
   /**
    * Run a query where the comparison value
@@ -61,8 +62,8 @@ declare class Query {
    * @param {any} right_value value to use on R side of comparison where V BETWEEN L AND R
    * @return {Query} query to continue the query on.
    */
-  between(column: $Keys<T.columns>, comparison_value: any, left_value: any, right_value: any): Query<T>;
+  between<M>(column: $Keys<M>, comparison_value: any, left_value: any, right_value: any): Query<M>;
 
 
-  then(callback: (results: T) => void): Query;
+  then<M>(callback: (results: M) => void): Query;
 }
